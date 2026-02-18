@@ -1,0 +1,15 @@
+
+fastapi
+uvicorn
+pydantic
+faiss-cpu
+nltk
+ftfy
+sentence-transformers
+ollama
+numpy
+scipy
+tqdm
+python-json-logger
+python-dotenv
+requests
