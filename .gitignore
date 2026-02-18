@@ -1,0 +1,70 @@
+# =========================
+# Python Cache
+# =========================
+__pycache__/
+**/__pycache__/
+*.py[cod]
+*.pyo
+
+# =========================
+# Virtual Environments
+# =========================
+venv/
+.venv/
+env/
+ENV/
+
+# =========================
+# Environment Variables
+# =========================
+.env
+.env.*
+
+# =========================
+# Logs
+# =========================
+*.log
+logs/
+*.out
+
+# =========================
+# FAISS / Vector Index
+# =========================
+*.index
+*.faiss
+data/
+indexes/
+
+# =========================
+# OS / Editor Files
+# =========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+
+# =========================
+# Build / Distribution
+# =========================
+build/
+dist/
+*.egg-info/
+
+# =========================
+# Jupyter / Temp
+# =========================
+.ipynb_checkpoints/
+
+# =========================
+# Coverage / Test
+# =========================
+.coverage
+htmlcov/
+.pytest_cache/
+
+# =========================
+# Secrets / Credentials
+# =========================
+secrets.json
+credentials.json

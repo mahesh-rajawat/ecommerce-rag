@@ -1,0 +1,11 @@
+import os
+TOP_K = 15
+DISTANCE_THRESHOLD = 350
+MAX_CONTEXT = 3000
+MODEL = "llama3.2"
+DATA_DIR = "./data/tenants"
+DIM=768
+LLM_PROVIDER = os.getenv("LLM_PROVIDER", "ollama")
+
+MIN_CONFIDENCE = 0.35
+MIN_SOURCES = 2
