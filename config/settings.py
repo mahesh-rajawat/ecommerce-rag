@@ -9,3 +9,4 @@ LLM_PROVIDER = os.getenv("LLM_PROVIDER", "ollama")
 
 MIN_CONFIDENCE = 0.35
 MIN_SOURCES = 2
+VECTOR_HANDLER = "faiss"

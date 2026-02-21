@@ -1,4 +1,4 @@
-from logs.logger import get_logger
+from logger.logger import get_logger
 from config.settings import MIN_CONFIDENCE
 from config.settings import MIN_SOURCES
 from config.settings import DISTANCE_THRESHOLD

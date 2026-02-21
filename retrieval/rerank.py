@@ -1,5 +1,5 @@
 from config.settings import DISTANCE_THRESHOLD
-from logs.logger import get_logger
+from logger.logger import get_logger
 
 class Reranker:
     stopwords = {"the", "is", "in", "and", "to", "of", "a", "that", "it", "with", "as", "for", "was", "on", "are", "by", "this", "be", "or"}

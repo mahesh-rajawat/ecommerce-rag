@@ -1,6 +1,6 @@
 
 from llm.client import LLMClient
-from logs.logger import get_logger
+from logger.logger import get_logger
 import ollama
 
 class OllamaClient(LLMClient):

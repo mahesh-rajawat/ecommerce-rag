@@ -1,9 +1,9 @@
 from fastapi import FastAPI, HTTPException, Query
-from pydantic import BaseModel
+from ingestion.ingestion_request import IngestRequest
 from pipeline.ingestion import IngestionPipeline
 from pipeline.searching import SearchingPipeline
-from logs.logger import get_logger
-
+from logger.logger import get_logger
+from ingestion.factory import get_text_loaded
 
 
 app = FastAPI()
@@ -16,17 +16,18 @@ def index() -> dict[str, str]:
 def health() -> dict[str, str]:
     return {"status": "ok"}
 
-class UploadRequest(BaseModel):
-    text: str
-    company: str
+    
 
-@app.post("/upload", status_code=201)
-def upload(data:UploadRequest):
-    if not data.text:
-        raise HTTPException(status_code=404, detail="Empty text")
-    company = data.company.lower()
-    ingestion = IngestionPipeline(company, text=data.text)
-    return ingestion.run()
+@app.post("/ingest", status_code=201)
+def ingest(req: IngestRequest):
+    company = req.company.lower()
+    print(company)
+    domain = req.domain.lower() if req.domain else "general"
+    text_loader = get_text_loaded(req.source_type)
+    text = text_loader(req)
+    ingestion = IngestionPipeline(company, domain)
+
+    return ingestion.run(text)
 
 logger = get_logger("api_ask")
 
