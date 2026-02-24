@@ -1,11 +1,13 @@
 from config.settings import DISTANCE_THRESHOLD
 from logger.logger import get_logger
+from utils.math import cosine
 
 class Reranker:
     stopwords = {"the", "is", "in", "and", "to", "of", "a", "that", "it", "with", "as", "for", "was", "on", "are", "by", "this", "be", "or"}
 
-    def __init__(self, query):
+    def __init__(self, query, query_vector):
         self.query = query
+        self.query_vector = query_vector
         self.logger = get_logger("search.rerank")
 
     def re_rank(self, distance, indexes, documents):
@@ -19,24 +21,36 @@ class Reranker:
         
             doc = documents[idx]
             k_score = self.keyword_score(doc['text'], keywords)
+            semantic = cosine(self.query_vector, doc['embedding'])
+            keyword = min(k_score / 5, 1.0)
+            final_score = (
+                0.7 * semantic +
+                0.3 * keyword
+            )
+            
+            self.logger.debug(f"RE-RANK idx={idx} dist={dis} semantic={semantic} k-score={k_score} final_score={final_score}")
+
+            if final_score < 0.3:
+                continue
+            
 
             if dis < DISTANCE_THRESHOLD or k_score > 0:
                 candidates.append({
                     'idx': int(idx),
                     "distance": float(dis),
-                    "k_score": int(k_score)
+                    "semantic": semantic,
+                    "k_score": int(k_score),
+                    "embedding": doc['embedding'],
+                    "text": doc['text'],
+                    "final_score": final_score
                 })
+            
 
         #Rank results
         candidates.sort(
-            key=lambda x: (x['distance'], -x['k_score'])
+            key=lambda x: x["final_score"],
+            reverse=True
         )
-
-        for c in candidates:
-            self.logger.debug(
-                "Candidate idx=%s distance=%.2f keyword_score=%d",
-                c["idx"], c["distance"], c["k_score"]
-            )
 
         self.logger.info("Final candidates: %d", len(candidates))
 

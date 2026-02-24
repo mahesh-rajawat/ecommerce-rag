@@ -19,8 +19,9 @@ class Search:
         self.logger = get_logger("search")
 
     def search(self):
-        reranker = Reranker(self.query)
         query_vector = self.embeder.embed_query(self.query)
+        reranker = Reranker(self.query, query_vector)
+       
         kewords = reranker.extract_keywords()
         index, docs = self.vector_handler.load_company_data_and_index(
             get_domain_dir(self.company, self.domain)
@@ -32,7 +33,7 @@ class Search:
         
         candidates = reranker.re_rank(D, I, documents=docs)
         context = self.__get_context(candidates, docs)
-        confidence = ConfidenceScorer().score(candidates, len(kewords))
+        confidence = ConfidenceScorer().score(candidates, query_vector, kewords)
         if not context:
             return False
         

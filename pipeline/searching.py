@@ -23,7 +23,7 @@ class SearchingPipeline:
         self.validate()
         domain = self.router.detect(self.query)
         context, confidence =  Search(self.query, self.companny, domain).search()
-        
+        self.logger.debug(f"detected domain {domain}")
         if not context:
             return {
                 "answer": "No relevant information found in the documents.",

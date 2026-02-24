@@ -20,14 +20,17 @@ class Store:
         vecs = np.array(vectors).astype("float32")
         self.validate_np_array(vecs)
         index, documents = self.vector_handler.load_company_data_and_index(path)
-
+        start_id = len(documents)
         index.add(vecs)
         for i, c in enumerate(chunks):
+            doc_id = start_id + i
+            
             documents.append({
-                'id': i,
+                'id': doc_id,
                 "text": c,
                 "company": self.company,
                 "document": self.domain,
+                "embedding": vectors[i],
                 "source": "api"
             })
         

@@ -2,7 +2,6 @@ from .base import BaseVectorHnadler
 import os
 import json
 import faiss
-from utils.paths import get_company_dir
 from config.settings import DIM
 
 class FaissVectorHandler(BaseVectorHnadler):
