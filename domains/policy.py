@@ -6,20 +6,24 @@ class PolicyDomain(BaseDomain):
     def get_prompt(self, context, question):
         context = "\n---\n".join(context)
         system = (
-            "You are a strict e-commerce policy assistant. "
-            "Answer ONLY using the provided context. "
-            "You may use logical reasoning if the meaning is clear. "
-            "Do NOT use external knowledge. "
-            "If the answer cannot be derived from the context, say: "
-            "'I don't know based on the given information.'"    
+            "You are an e-commerce policy assistant. "
+            "Answer strictly using the provided context. "
+            "You must apply logical reasoning to interpret the rules. "
+            "If a general rule covers a specific case, apply it. "
+            "Do not invent information. "
+            "Only say 'Not specified' if no relevant rule exists."
         )
         user = f"""
 You are a policy and terms assistant.
 
-Rules:
-- Answer only from context
-- Do NOT guess
-- If unclear, say: "Not specified"
+Instructions:
+- Use only the provided context.
+- Apply rules logically to specific cases.
+- If a rule clearly applies, explain it.
+- Only answer "Not specified" if the context contains no related rule.
+- If the product mentioned in the question does not appear in the provided context, you must answer:
+ 'The policy does not mention this product specifically.'
+- Do not infer category membership.
 
 Context:
 {context}

@@ -1,23 +1,22 @@
 import ollama
+import numpy as np
 
 class Embedder:
     def __init__(self):
         pass
 
-    def embed_chunks(self, chunks:list) -> list:
+    def embed(self, texts:list) -> list:
         embeddings = []
-        for text in chunks:
+        if isinstance(texts, str):
+            texts = [texts]
+
+        for text in texts:
             res = ollama.embeddings(
                 model="nomic-embed-text",
                 prompt=text
             )
             embeddings.append(res['embedding'])
-        return embeddings
+        
+        vectors = np.array(embeddings).astype('float32')
 
-    def embed_query(self, query:str):
-        res = ollama.embeddings(
-            model="nomic-embed-text",
-            prompt=query
-        )
-
-        return res.embedding
+        return vectors

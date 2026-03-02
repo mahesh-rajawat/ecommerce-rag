@@ -1,9 +1,10 @@
 import numpy as np
-from config.settings import DIM, MAX_CONTEXT
+from config.settings import DIM, MAX_CONTEXT, TOP_K
 from retrieval.rerank import Reranker
+from retrieval.rerankers.reranker_composite import RerankerComposite
 from preprocess.cleaner import clean_text
 from index.embedder import Embedder
-from guardtrail.validation import validate_distance_index
+from guardtrail.validation import validate_distance_index, validate_retirived_docs
 from retrieval.confidence import ConfidenceScorer
 from vector_handlers.factory import get_vector_handler
 from logger.logger import get_logger
@@ -19,11 +20,11 @@ class Search:
         self.logger = get_logger("search")
 
     def search(self):
-        query_vector = self.embeder.embed_query(self.query)
-        reranker = Reranker(self.query, query_vector)
-       
-        kewords = reranker.extract_keywords()
-        index, docs = self.vector_handler.load_company_data_and_index(
+        query_vector = self.embeder.embed(self.query)
+        reranker = RerankerComposite(self.query, query_vector)
+        
+        keywords = reranker.extract_keywords()
+        index, docs, embeddings = self.vector_handler.load_company_data_and_index(
             get_domain_dir(self.company, self.domain)
         )
         D, I = self.search_vector(index, query_vector)
@@ -31,22 +32,26 @@ class Search:
         if (is_valid == False):
             return False
         
-        candidates = reranker.re_rank(D, I, documents=docs)
+        safe_dis, safe_indexes, safe_docs = validate_retirived_docs(D, I, docs, self.company, self.domain)
+        self.logger.info(f"Found %d safe documents after validation", len(safe_docs))
+        print(f"Found {safe_indexes} safe documents after validation")
+
+        # Rerank candidates
+        candidates = reranker.re_rank(safe_dis, safe_indexes, documents=safe_docs, doc_embeddings=embeddings)
+
         context = self.__get_context(candidates, docs)
-        confidence = ConfidenceScorer().score(candidates, query_vector, kewords)
+
+        confidence = ConfidenceScorer().score(candidates, self.query, query_vector, keywords=keywords)
         if not context:
             return False
-        
+
         return context, confidence
 
     def search_vector(self, index, vector):
         self.logger.debug("Running vector search")
-        q_np_array = np.array([vector]).astype("float32")
-
-        if q_np_array.ndim != 2 or q_np_array.shape[1] != DIM:
-            raise ValueError("Invalid embedding dimension")
+        self.vector_handler.normalize_embeddings(vector)
         
-        D, I = index.search(q_np_array, k=15)
+        D, I = index.search(vector, k=TOP_K)
         self.logger.info("Vector search returned %d Indexes", len(I[0]))
 
         return [D, I]

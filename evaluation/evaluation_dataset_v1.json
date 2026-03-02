@@ -1,0 +1,165 @@
+[
+  {
+    "id": 1,
+    "question": "Can I return a camera if I opened the package?",
+    "expected_answer": "Yes, within 14 days if the product is in resellable condition.",
+    "policy_source": "rajala_return_policy",
+    "answer_type": "factual",
+    "difficulty": "easy"
+  },
+  {
+    "id": 2,
+    "question": "How many days do I have to return an online purchase?",
+    "expected_answer": "14 days from receiving the product.",
+    "policy_source": "rajala_return_policy",
+    "answer_type": "factual",
+    "difficulty": "easy"
+  },
+  {
+    "id": 3,
+    "question": "Can I return a customized product?",
+    "expected_answer": "No, customized products are not eligible for return.",
+    "policy_source": "rajala_return_policy",
+    "answer_type": "factual",
+    "difficulty": "medium"
+  },
+  {
+    "id": 4,
+    "question": "Who pays for return shipping?",
+    "expected_answer": "Customer pays unless the product is defective.",
+    "policy_source": "rajala_return_policy",
+    "answer_type": "conditional",
+    "difficulty": "medium"
+  },
+  {
+    "id": 5,
+    "question": "Can I cancel my order after it has been shipped?",
+    "expected_answer": "No, once shipped it cannot be cancelled but can be returned after delivery.",
+    "policy_source": "rajala_order_policy",
+    "answer_type": "conditional",
+    "difficulty": "medium"
+  },
+
+  {
+    "id": 6,
+    "question": "What happens if I receive a damaged product?",
+    "expected_answer": "Customer should report immediately and may receive replacement or refund.",
+    "policy_source": "rajala_warranty_policy",
+    "answer_type": "procedural",
+    "difficulty": "easy"
+  },
+  {
+    "id": 7,
+    "question": "Is warranty transferable to another owner?",
+    "expected_answer": "No, warranty applies only to the original purchaser.",
+    "policy_source": "rajala_warranty_policy",
+    "answer_type": "factual",
+    "difficulty": "medium"
+  },
+  {
+    "id": 8,
+    "question": "Can I exchange a product instead of returning it?",
+    "expected_answer": "Exchange is possible depending on stock availability.",
+    "policy_source": "rajala_return_policy",
+    "answer_type": "conditional",
+    "difficulty": "medium"
+  },
+  {
+    "id": 9,
+    "question": "Are gift cards refundable?",
+    "expected_answer": "No, gift cards are non-refundable.",
+    "policy_source": "rajala_payment_policy",
+    "answer_type": "factual",
+    "difficulty": "easy"
+  },
+  {
+    "id": 10,
+    "question": "Can I use multiple payment methods for one purchase?",
+    "expected_answer": "Yes, depending on checkout options available.",
+    "policy_source": "rajala_payment_policy",
+    "answer_type": "conditional",
+    "difficulty": "medium"
+  },
+
+  {
+    "id": 11,
+    "question": "Does Pamark accept bulk purchase returns?",
+    "expected_answer": "Bulk returns are evaluated case-by-case.",
+    "policy_source": "pamark_return_policy",
+    "answer_type": "conditional",
+    "difficulty": "hard"
+  },
+  {
+    "id": 12,
+    "question": "How long is Pamark product warranty?",
+    "expected_answer": "Warranty duration depends on manufacturer terms.",
+    "policy_source": "pamark_warranty_policy",
+    "answer_type": "factual",
+    "difficulty": "medium"
+  },
+  {
+    "id": 13,
+    "question": "Can businesses return used products?",
+    "expected_answer": "Used products are generally not eligible for return.",
+    "policy_source": "pamark_return_policy",
+    "answer_type": "conditional",
+    "difficulty": "hard"
+  },
+  {
+    "id": 14,
+    "question": "What documents are required for warranty claim?",
+    "expected_answer": "Proof of purchase is required.",
+    "policy_source": "pamark_warranty_policy",
+    "answer_type": "factual",
+    "difficulty": "easy"
+  },
+  {
+    "id": 15,
+    "question": "Are shipping delays compensated?",
+    "expected_answer": "Shipping delays are not automatically compensated.",
+    "policy_source": "pamark_shipping_policy",
+    "answer_type": "factual",
+    "difficulty": "medium"
+  },
+
+  {
+    "id": 16,
+    "question": "Can I modify delivery address after order confirmation?",
+    "expected_answer": "Address changes are possible before shipment only.",
+    "policy_source": "rajala_shipping_policy",
+    "answer_type": "conditional",
+    "difficulty": "medium"
+  },
+  {
+    "id": 17,
+    "question": "Do you ship internationally?",
+    "expected_answer": "International shipping availability depends on destination country.",
+    "policy_source": "rajala_shipping_policy",
+    "answer_type": "conditional",
+    "difficulty": "easy"
+  },
+  {
+    "id": 18,
+    "question": "Is express shipping refundable?",
+    "expected_answer": "Express shipping fees are non-refundable unless service fails.",
+    "policy_source": "rajala_shipping_policy",
+    "answer_type": "conditional",
+    "difficulty": "hard"
+  },
+  {
+    "id": 19,
+    "question": "Can warranty cover accidental damage?",
+    "expected_answer": "Warranty does not cover accidental damage.",
+    "policy_source": "pamark_warranty_policy",
+    "answer_type": "factual",
+    "difficulty": "medium"
+  },
+  {
+    "id": 20,
+    "question": "How long does refund processing take?",
+    "expected_answer": "Refunds are processed within 7–14 business days.",
+    "policy_source": "rajala_refund_policy",
+    "answer_type": "factual",
+    "difficulty": "easy"
+  }
+]

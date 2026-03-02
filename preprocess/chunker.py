@@ -24,7 +24,7 @@ def chunker(text: str, length=400, overlap=80) -> list:
             current += " " + s
         else:
             chunks.append(current.strip())
-            current = s
+            current = current[-overlap:] + s
     if current:
         chunks.append(current)
 

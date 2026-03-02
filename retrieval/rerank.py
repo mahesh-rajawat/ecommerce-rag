@@ -14,14 +14,17 @@ class Reranker:
         self.logger.info("Reranking candidates")
         keywords = self.extract_keywords()
         candidates = []
-        for dis, idx in zip(distance[0], indexes[0]):
+        for dis, idx in zip(distance, indexes):
         # index saftey, else index not found error
             if idx < 0 or idx >= len(documents):
                 continue
         
             doc = documents[idx]
             k_score = self.keyword_score(doc['text'], keywords)
-            semantic = cosine(self.query_vector, doc['embedding'])
+            # semantic = cosine(self.query_vector, doc['embedding'])
+            semantic = 1 - (dis / 2)
+
+            #self.logger.debug(f"semantic={semantic}")
             keyword = min(k_score / 5, 1.0)
             final_score = (
                 0.7 * semantic +
@@ -40,7 +43,6 @@ class Reranker:
                     "distance": float(dis),
                     "semantic": semantic,
                     "k_score": int(k_score),
-                    "embedding": doc['embedding'],
                     "text": doc['text'],
                     "final_score": final_score
                 })
@@ -82,7 +84,11 @@ class Reranker:
             "tax-free": ["exclusive", "exempt", "no tax"],
             "before": ["exclusive", "prior"],
             "vat": ["vat", "tax"],
-            "price": ["price", "cost", "fee"]
+            "price": ["price", "cost", "fee"],
+            "under 18": ["minor", "underage", "youth"],
+            "over 18": ["adult", "overage", "mature"],
+            "discount": ["discount", "reduction", "offer"],
+            "minor": ["minor", "underage", "under age 18"],
         }
 
         expanded = set()
@@ -92,5 +98,5 @@ class Reranker:
 
             if w in SYNONYMS:
                 expanded.update(SYNONYMS[w])
-
+        print("Expanded keywords:", expanded)
         return expanded

@@ -30,3 +30,4 @@ class DomainDetecter:
     
     def get_domain(self, name: str) -> BaseDomain:
         return self.domains.get(name, self.domains.get("policy"))
+    
