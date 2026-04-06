@@ -1,15 +1,15 @@
 import logging
 import os
-LOG_LEVEL = os.getenv("LOG_LEVEL", "INFO")
+LOG_LEVEL = os.getenv("LOG_LEVEL", "DEBUG")
 from logging.handlers import RotatingFileHandler
-LOG_DIR = "logs/files"
+LOG_DIR = "app/logs/files"
 
 if not os.path.exists(LOG_DIR):
     os.makedirs(LOG_DIR)
 
 def get_logger(name):
     logger = logging.getLogger(name)
-
+    
     if logger.handlers:
         return logger
     

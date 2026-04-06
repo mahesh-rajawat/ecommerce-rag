@@ -9,3 +9,6 @@ class BaseDomain:
     
     def get_min_confidence(self) -> float:
         return 0.35
+    
+    def get_answer_format(self):
+        raise NotImplementedError

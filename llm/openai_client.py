@@ -1,7 +1,7 @@
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
-from llm.client import LLMClient
+from app.llm.client import LLMClient
 
 class OpenAIClient(LLMClient):
     def __init__(self):

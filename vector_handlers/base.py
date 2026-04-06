@@ -1,4 +1,4 @@
-from utils.paths import get_company_dir
+from app.utils.paths import get_company_dir
 
 class BaseVectorHnadler:
     def __init__(self):

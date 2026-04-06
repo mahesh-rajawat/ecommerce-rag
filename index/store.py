@@ -1,10 +1,10 @@
 import numpy as np
 import faiss
 import json
-from utils.paths import get_company_dir
-from vector_handlers.factory import get_vector_handler
-from index.embedder import Embedder
-from preprocess.metadata_generator import MetaGenerator
+from app.utils.paths import get_company_dir
+from app.vector_handlers.factory import get_vector_handler
+from app.index.embedder import Embedder
+from app.preprocess.metadata_generator import MetaGenerator
 DIM = 768
 
 class Store:

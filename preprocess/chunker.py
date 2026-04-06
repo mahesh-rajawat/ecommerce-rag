@@ -15,7 +15,7 @@ import nltk
 nltk.download('punkt')
 
 
-def chunker(text: str, length=400, overlap=80) -> list:
+def chunker(text: str, length=350, overlap=40) -> list:
     sentence = nltk.sent_tokenize(text)
     chunks = []
     current = ""

@@ -3,7 +3,7 @@ TOP_K = int(os.getenv("TOP_K", 30))
 DISTANCE_THRESHOLD = int(os.getenv("DISTANCE_THRESHOLD", 350))
 MAX_CONTEXT = int(os.getenv("MAX_CONTEXT", 3000))
 MODEL = os.getenv("MODEL", "llama3.2")
-DATA_DIR = os.getenv("DATA_DIR", "./data/tenants")
+DATA_DIR = os.getenv("DATA_DIR", "./app/data/tenants")
 DIM = int(os.getenv("DIM", 768))
 LLM_PROVIDER = os.getenv("LLM_PROVIDER", "ollama")
 

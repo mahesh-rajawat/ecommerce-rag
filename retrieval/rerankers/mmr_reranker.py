@@ -1,11 +1,11 @@
             # semantic = cosine(self.query_vector, doc['embedding'])
 import numpy as np
-from logger.logger import get_logger 
+from app.logger.logger import get_logger 
 
-MMR_TOP_K = 8
-
+MMR_TOP_K = 10
+# MMR means Maximal Marginal Relevance, it is a reranking algorithm that takes into account both relevance and diversity of the documents. It is used to select a subset of documents that are relevant to the query while also being diverse from each other. The lambda_param controls the trade-off between relevance and diversity, with higher values favoring relevance and lower values favoring diversity.
 class MMRReranker:
-    def __init__(self, lambda_param=0.6):
+    def __init__(self, lambda_param=0.8):
         self.lambda_param = lambda_param
         self.logger = get_logger("search.mmr_reranker")
 
@@ -45,7 +45,7 @@ class MMRReranker:
                     self.lambda_param * relevance
                     - (1 - self.lambda_param) * diversity_penalty
                 )
-                # self.logger.debug(f"MMR score for idx {idx}: relevance={relevance}, diversity_penalty={diversity_penalty}, score={score}")
+                self.logger.debug(f"MMR score for idx {idx}: relevance={relevance}, diversity_penalty={diversity_penalty}, score={score}")
                 mmr_scores.append((idx, score))
 
             best_idx = max(mmr_scores, key=lambda x: x[1])[0]

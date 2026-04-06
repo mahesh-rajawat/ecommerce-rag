@@ -1,14 +1,14 @@
 import numpy as np
-from config.settings import DIM, MAX_CONTEXT, TOP_K
-from retrieval.rerank import Reranker
-from retrieval.rerankers.reranker_composite import RerankerComposite
-from preprocess.cleaner import clean_text
-from index.embedder import Embedder
-from guardtrail.validation import validate_distance_index, validate_retirived_docs
-from retrieval.confidence import ConfidenceScorer
-from vector_handlers.factory import get_vector_handler
-from logger.logger import get_logger
-from utils.paths import get_domain_dir
+from app.config.settings import DIM, MAX_CONTEXT, TOP_K
+from app.retrieval.rerank import Reranker
+from app.retrieval.rerankers.reranker_composite import RerankerComposite
+from app.preprocess.cleaner import clean_text
+from app.index.embedder import Embedder
+from app.guardtrail.validation import validate_distance_index, validate_retirived_docs
+from app.retrieval.confidence import ConfidenceScorer
+from app.vector_handlers.factory import get_vector_handler
+from app.logger.logger import get_logger
+from app.utils.paths import get_domain_dir
 
 class Search:
     def __init__(self, query, company, domain):
@@ -30,7 +30,7 @@ class Search:
         D, I = self.search_vector(index, query_vector)
         is_valid = validate_distance_index(D, I)
         if (is_valid == False):
-            return False
+            return [], 0.0
         
         safe_dis, safe_indexes, safe_docs = validate_retirived_docs(D, I, docs, self.company, self.domain)
         self.logger.info(f"Found %d safe documents after validation", len(safe_docs))
@@ -43,7 +43,7 @@ class Search:
 
         confidence = ConfidenceScorer().score(candidates, self.query, query_vector, keywords=keywords)
         if not context:
-            return False
+            return [], 0.0
 
         return context, confidence
 
@@ -68,7 +68,10 @@ class Search:
             if totalc_length + len(text) > MAX_CONTEXT:
                 break
 
-            context.append(text)
+            context.append({
+                "id": c['idx'],
+                "text": text
+            })
             totalc_length += len(text)
         return context
     

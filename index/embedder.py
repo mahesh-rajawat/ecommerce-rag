@@ -20,3 +20,4 @@ class Embedder:
         vectors = np.array(embeddings).astype('float32')
 
         return vectors
+

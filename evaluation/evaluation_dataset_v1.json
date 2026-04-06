@@ -1,165 +1,202 @@
 [
   {
     "id": 1,
+    "company": "rajala",
     "question": "Can I return a camera if I opened the package?",
-    "expected_answer": "Yes, within 14 days if the product is in resellable condition.",
+    "expected_answer_contains": ["14 days from receiving the product", "product must be in condition comparable to new", "in original packaging without markings"],
+    "expected_chunks": ["return period", "product condition", "14-day right of return"],
     "policy_source": "rajala_return_policy",
     "answer_type": "factual",
     "difficulty": "easy"
   },
   {
     "id": 2,
+    "company": "rajala",
     "question": "How many days do I have to return an online purchase?",
-    "expected_answer": "14 days from receiving the product.",
+    "expected_answer_contains": ["fourteen (14) days", "from receiving the product", "consumer protection act"],
+    "expected_chunks": ["return period", "14-day right of return"],
     "policy_source": "rajala_return_policy",
     "answer_type": "factual",
     "difficulty": "easy"
   },
   {
     "id": 3,
+    "company": "rajala",
     "question": "Can I return a customized product?",
-    "expected_answer": "No, customized products are not eligible for return.",
+    "expected_answer_contains": ["right of return does not apply", "goods manufactured or modified according to customer's wishes"],
+    "expected_chunks": ["customized products", "right of return exceptions"],
     "policy_source": "rajala_return_policy",
     "answer_type": "factual",
     "difficulty": "medium"
   },
   {
     "id": 4,
+    "company": "rajala",
     "question": "Who pays for return shipping?",
-    "expected_answer": "Customer pays unless the product is defective.",
+    "expected_answer_contains": ["handling fee of €6.90", "customer pays", "no fee if returned to store or credited to gift card"],
+    "expected_chunks": ["return costs", "handling fee"],
     "policy_source": "rajala_return_policy",
     "answer_type": "conditional",
     "difficulty": "medium"
   },
   {
     "id": 5,
-    "question": "Can I cancel my order after it has been shipped?",
-    "expected_answer": "No, once shipped it cannot be cancelled but can be returned after delivery.",
-    "policy_source": "rajala_order_policy",
-    "answer_type": "conditional",
+    "company": "rajala",
+    "question": "What products cannot be returned?",
+    "expected_answer_contains": ["hygiene products", "earphones or headphones", "customized image products", "memory cards", "sealed products for single use", "camera drones that have been put into use"],
+    "expected_chunks": ["return exceptions", "right of return does not apply"],
+    "policy_source": "rajala_return_policy",
+    "answer_type": "factual",
     "difficulty": "medium"
   },
-
   {
     "id": 6,
-    "question": "What happens if I receive a damaged product?",
-    "expected_answer": "Customer should report immediately and may receive replacement or refund.",
+    "company": "rajala",
+    "question": "What happens if I receive a defective product?",
+    "expected_answer_contains": ["notify seller without delay", "no later than two months after defect occurred", "seller is liable for defects"],
+    "expected_chunks": ["liability for defects", "defect notification"],
     "policy_source": "rajala_warranty_policy",
     "answer_type": "procedural",
     "difficulty": "easy"
   },
   {
     "id": 7,
-    "question": "Is warranty transferable to another owner?",
-    "expected_answer": "No, warranty applies only to the original purchaser.",
+    "company": "rajala",
+    "question": "Does warranty cover products damaged by misuse?",
+    "expected_answer_contains": ["warranty is exempt", "improper use", "accident or other circumstances on buyer's side", "not covered"],
+    "expected_chunks": ["warranty exemptions", "warranty liability"],
     "policy_source": "rajala_warranty_policy",
     "answer_type": "factual",
     "difficulty": "medium"
   },
   {
     "id": 8,
-    "question": "Can I exchange a product instead of returning it?",
-    "expected_answer": "Exchange is possible depending on stock availability.",
+    "company": "rajala",
+    "question": "Can I exchange a returned product for another product or gift card?",
+    "expected_answer_contains": ["yes", "exchange for another product or gift card", "no delivery costs charged for new shipment"],
+    "expected_chunks": ["product exchange", "gift card exchange"],
     "policy_source": "rajala_return_policy",
     "answer_type": "conditional",
     "difficulty": "medium"
   },
   {
     "id": 9,
-    "question": "Are gift cards refundable?",
-    "expected_answer": "No, gift cards are non-refundable.",
+    "company": "rajala",
+    "question": "What payment methods does Rajala accept?",
+    "expected_answer_contains": ["online bank payments", "credit cards (Visa, Mastercard)", "MobilePay", "Rajala gift card", "Rajala invoice", "Rajala account"],
+    "expected_chunks": ["payment methods", "online payments"],
     "policy_source": "rajala_payment_policy",
     "answer_type": "factual",
     "difficulty": "easy"
   },
   {
     "id": 10,
-    "question": "Can I use multiple payment methods for one purchase?",
-    "expected_answer": "Yes, depending on checkout options available.",
-    "policy_source": "rajala_payment_policy",
-    "answer_type": "conditional",
+    "company": "rajala",
+    "question": "How long is the warranty period for products?",
+    "expected_answer_contains": ["warranty period promised by manufacturer", "warranty begins on date of purchase", "repair or exchange does not extend original warranty"],
+    "expected_chunks": ["warranty period", "manufacturer warranty"],
+    "policy_source": "rajala_warranty_policy",
+    "answer_type": "factual",
     "difficulty": "medium"
   },
-
   {
     "id": 11,
-    "question": "Does Pamark accept bulk purchase returns?",
-    "expected_answer": "Bulk returns are evaluated case-by-case.",
-    "policy_source": "pamark_return_policy",
-    "answer_type": "conditional",
-    "difficulty": "hard"
+    "company": "rajala",
+    "question": "What condition must returned products be in?",
+    "expected_answer_contains": ["condition comparable to new", "original packaging", "well packed without markings", "purchase receipt included"],
+    "expected_chunks": ["return condition", "product condition"],
+    "policy_source": "rajala_return_policy",
+    "answer_type": "factual",
+    "difficulty": "easy"
   },
   {
     "id": 12,
-    "question": "How long is Pamark product warranty?",
-    "expected_answer": "Warranty duration depends on manufacturer terms.",
-    "policy_source": "pamark_warranty_policy",
+    "company": "rajala",
+    "question": "Is there a right of return for in-store purchases?",
+    "expected_answer_contains": ["no right of return for purchases made in store", "fourteen (14) day right of exchange"],
+    "expected_chunks": ["in-store purchases", "exchange rights"],
+    "policy_source": "rajala_return_policy",
     "answer_type": "factual",
     "difficulty": "medium"
   },
   {
     "id": 13,
-    "question": "Can businesses return used products?",
-    "expected_answer": "Used products are generally not eligible for return.",
-    "policy_source": "pamark_return_policy",
-    "answer_type": "conditional",
-    "difficulty": "hard"
+    "company": "rajala",
+    "question": "How are VAT and taxes handled on products?",
+    "expected_answer_contains": ["products include VAT", "currently 25.5%", "replacement devices do not include VAT"],
+    "expected_chunks": ["VAT", "taxation", "pricing"],
+    "policy_source": "rajala_policy",
+    "answer_type": "factual",
+    "difficulty": "easy"
   },
   {
     "id": 14,
-    "question": "What documents are required for warranty claim?",
-    "expected_answer": "Proof of purchase is required.",
-    "policy_source": "pamark_warranty_policy",
+    "company": "rajala",
+    "question": "What delivery methods are available?",
+    "expected_answer_contains": ["pick-up from post office", "SmartPOST", "Matkahuolto nearby package", "pick-up from stores"],
+    "expected_chunks": ["delivery methods", "shipping options"],
+    "policy_source": "rajala_shipping_policy",
     "answer_type": "factual",
     "difficulty": "easy"
   },
   {
     "id": 15,
-    "question": "Are shipping delays compensated?",
-    "expected_answer": "Shipping delays are not automatically compensated.",
-    "policy_source": "pamark_shipping_policy",
+    "company": "rajala",
+    "question": "When does the 14-day return period start?",
+    "expected_answer_contains": ["fourteen (14) days of receiving the product", "from receiving the product"],
+    "expected_chunks": ["return period", "receiving product"],
+    "policy_source": "rajala_return_policy",
     "answer_type": "factual",
-    "difficulty": "medium"
-  },
-
-  {
-    "id": 16,
-    "question": "Can I modify delivery address after order confirmation?",
-    "expected_answer": "Address changes are possible before shipment only.",
-    "policy_source": "rajala_shipping_policy",
-    "answer_type": "conditional",
-    "difficulty": "medium"
-  },
-  {
-    "id": 17,
-    "question": "Do you ship internationally?",
-    "expected_answer": "International shipping availability depends on destination country.",
-    "policy_source": "rajala_shipping_policy",
-    "answer_type": "conditional",
     "difficulty": "easy"
   },
   {
-    "id": 18,
-    "question": "Is express shipping refundable?",
-    "expected_answer": "Express shipping fees are non-refundable unless service fails.",
+    "id": 16,
+    "company": "rajala",
+    "question": "Does adding a product to cart reserve it?",
+    "expected_answer_contains": ["adding product to shopping cart does not reserve the product"],
+    "expected_chunks": ["shopping cart", "product reservation"],
+    "policy_source": "rajala_policy",
+    "answer_type": "factual",
+    "difficulty": "easy"
+  },
+  {
+    "id": 17,
+    "company": "rajala",
+    "question": "What happens if I need to deliver to Estonia or Åland?",
+    "expected_answer_contains": ["customer must contact customer service", "asiakaspalvelut@rajalacamera.fi"],
+    "expected_chunks": ["international delivery", "Estonia", "Åland"],
     "policy_source": "rajala_shipping_policy",
-    "answer_type": "conditional",
-    "difficulty": "hard"
+    "answer_type": "procedural",
+    "difficulty": "medium"
+  },
+  {
+    "id": 18,
+    "company": "rajala",
+    "question": "How long does the refund process take?",
+    "expected_answer_contains": ["no later than 14 days", "after receiving cancellation notice", "after goods received back"],
+    "expected_chunks": ["refund", "14 days", "cancellation"],
+    "policy_source": "rajala_refund_policy",
+    "answer_type": "factual",
+    "difficulty": "easy"
   },
   {
     "id": 19,
-    "question": "Can warranty cover accidental damage?",
-    "expected_answer": "Warranty does not cover accidental damage.",
-    "policy_source": "pamark_warranty_policy",
+    "company": "rajala",
+    "question": "What are the requirements for warranty to be valid?",
+    "expected_answer_contains": ["product used in accordance with manufacturer's recommendations", "proper use required", "warranty exempt if due to improper use"],
+    "expected_chunks": ["warranty requirements", "manufacturer recommendations"],
+    "policy_source": "rajala_warranty_policy",
     "answer_type": "factual",
     "difficulty": "medium"
   },
   {
     "id": 20,
-    "question": "How long does refund processing take?",
-    "expected_answer": "Refunds are processed within 7–14 business days.",
-    "policy_source": "rajala_refund_policy",
+    "company": "rajala",
+    "question": "Is Rajala responsible for shipping delays?",
+    "expected_answer_contains": ["not responsible for delays caused by force majeure", "not responsible for indirect damage"],
+    "expected_chunks": ["force majeure", "shipping delays", "liability"],
+    "policy_source": "rajala_policy",
     "answer_type": "factual",
-    "difficulty": "easy"
+    "difficulty": "medium"
   }
 ]

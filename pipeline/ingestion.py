@@ -1,6 +1,6 @@
-from preprocess.cleaner import clean_text
-from preprocess.chunker import chunker
-from index.store import Store
+from app.preprocess.cleaner import clean_text
+from app.preprocess.chunker import chunker
+from app.index.store import Store
 import os
 
 class IngestionPipeline:

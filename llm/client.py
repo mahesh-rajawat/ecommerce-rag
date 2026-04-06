@@ -1,4 +1,4 @@
-from logger.logger import get_logger
+from app.logger.logger import get_logger
 
 class LLMClient:
 

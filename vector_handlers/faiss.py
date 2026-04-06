@@ -2,7 +2,7 @@ from .base import BaseVectorHnadler
 import os
 import json
 import faiss
-from config.settings import DIM
+from app.config.settings import DIM
 import numpy as np
 
 _INDEX_CACHE = {}

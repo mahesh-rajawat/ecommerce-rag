@@ -1,4 +1,4 @@
-from llm.factory import get_llm_client
+from app.llm.factory import get_llm_client
 
 
 class RAGEngine:
@@ -9,6 +9,7 @@ class RAGEngine:
     def answer(self, context, question, domain_handler):
 
         prompt = domain_handler.get_prompt(context, question)
-        self.llm.generate(prompt)
+        answer_format = domain_handler.get_answer_format()
+        self.llm.generate(prompt, answer_format=answer_format)
 
         return self.llm.get_answer()

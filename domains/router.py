@@ -1,5 +1,5 @@
-from domains.policy import PolicyDomain
-from domains.base import BaseDomain
+from app.domains.policy import PolicyDomain
+from app.domains.base import BaseDomain
 
 POLICY_WORDS = {
     "vat", "tax", "terms", "policy", "refund", "return", "warranty", "delivery", "sell"

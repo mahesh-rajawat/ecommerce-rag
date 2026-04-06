@@ -1,5 +1,5 @@
-from llm.ollama_client import OllamaClient
-from config.settings import LLM_PROVIDER
+from app.llm.ollama_client import OllamaClient
+from app.config.settings import LLM_PROVIDER
 
 
 def get_llm_client():

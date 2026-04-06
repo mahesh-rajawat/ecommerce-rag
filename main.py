@@ -1,9 +1,9 @@
 from fastapi import FastAPI, HTTPException, Query
-from ingestion.ingestion_request import IngestRequest
-from pipeline.ingestion import IngestionPipeline
-from pipeline.searching import SearchingPipeline
-from logger.logger import get_logger
-from ingestion.factory import get_text_loaded
+from app.ingestion.ingestion_request import IngestRequest
+from app.pipeline.ingestion import IngestionPipeline
+from app.pipeline.searching import SearchingPipeline
+from app.logger.logger import get_logger
+from app.ingestion.factory import get_text_loaded
 
 
 app = FastAPI()

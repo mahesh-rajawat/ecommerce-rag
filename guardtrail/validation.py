@@ -1,7 +1,7 @@
-from logger.logger import get_logger
-from config.settings import MIN_CONFIDENCE
-from config.settings import MIN_SOURCES
-from config.settings import DISTANCE_THRESHOLD
+from app.logger.logger import get_logger
+from app.config.settings import MIN_CONFIDENCE
+from app.config.settings import MIN_SOURCES
+from app.config.settings import DISTANCE_THRESHOLD
 
 logger = get_logger("guardtrail.logs")
 

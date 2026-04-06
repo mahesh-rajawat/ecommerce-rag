@@ -1,6 +1,6 @@
-from config.settings import DISTANCE_THRESHOLD
-from logger.logger import get_logger
-from utils.math import cosine
+from app.config.settings import DISTANCE_THRESHOLD
+from app.logger.logger import get_logger
+from app.utils.math import cosine
 
 class Reranker:
     stopwords = {"the", "is", "in", "and", "to", "of", "a", "that", "it", "with", "as", "for", "was", "on", "are", "by", "this", "be", "or"}
@@ -89,14 +89,20 @@ class Reranker:
             "over 18": ["adult", "overage", "mature"],
             "discount": ["discount", "reduction", "offer"],
             "minor": ["minor", "underage", "under age 18"],
+            "shipping": ["shipping", "delivery", "postage", "freight", "transport", "shipment"],
+            "costs": ["price", "cost", "fee", "charge", "amount", "euro", "€", "handling"],
+            "returns": ["return", "refund", "exchange", "cancel", "restitution"],
+            "condition": ["opened", "package", "original", "used", "new", "seal"]
         }
 
         expanded = set()
 
         for w in words:
-            expanded.add(w)
+            w_lower = w.lower()
+            expanded.add(w_lower)
 
-            if w in SYNONYMS:
-                expanded.update(SYNONYMS[w])
-        print("Expanded keywords:", expanded)
+            for concept, bucket in SYNONYMS.items():
+                if w_lower in bucket or w_lower == concept:
+                    expanded.update(bucket)
+        
         return expanded

@@ -1,6 +1,6 @@
 import os
-from ingestion.loader.file import load_file 
-from ingestion.ingestion_request import IngestRequest
+from app.ingestion.loader.file import load_file 
+from app.ingestion.ingestion_request import IngestRequest
 
 def load_directory(req: IngestRequest):
     texts = []

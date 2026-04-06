@@ -1,13 +1,13 @@
-from retrieval.search import Search
-from logger.logger import get_logger
-from core.engine import RAGEngine
-from guardtrail.confidence import return_with_confidence
-from domains.router import DomainDetecter
-from domains.router_llm import DomainDetectorLLM
+from app.retrieval.search import Search
+from app.logger.logger import get_logger
+from app.core.engine import RAGEngine
+from app.guardtrail.confidence import return_with_confidence
+from app.domains.router import DomainDetecter
+from app.domains.router_llm import DomainDetectorLLM
 
 class SearchingPipeline:
     def __init__(self, query: str, company: str):
-        self.query = query.strip()
+        self.query = self.clear_query(query)
         self.companny = company.strip()
         self.logger = get_logger("pipeline.searching")
         self.router = DomainDetecter()
@@ -24,13 +24,15 @@ class SearchingPipeline:
     def run(self):
         self.validate()
         domain = self.llm_router.detect(self.query)
+        self.logger.info(f"Detected domain: {domain} for {self.companny}")
         context, confidence =  Search(self.query, self.companny, domain).search()
-        self.logger.debug(f"detected domain {domain}")
+        # print(f"Search returned context {context}")
+        self.logger.info(f"Detected domain {domain}")
         if not context:
             return {
                 "answer": "No relevant information found in the documents.",
                 "valid": False,
-                "confidence": confidence
+                "confidence": confidence,
             }
         domain_handler = self.llm_router.get_domain(domain)
         answer = self.rag_engine.answer(question=self.query, context=context, domain_handler=domain_handler)
@@ -40,4 +42,7 @@ class SearchingPipeline:
             confidence,
             len(context)
         )
+    
+    def clear_query(self, query):
+        return query.strip().replace("\n", " ").replace("?", "").replace("!", "")
 

@@ -1,7 +1,7 @@
-from config.settings import DISTANCE_THRESHOLD
+from app.config.settings import DISTANCE_THRESHOLD
 import numpy as np
-from logger.logger import get_logger
-from utils.math import cosine
+from app.logger.logger import get_logger
+from app.utils.math import cosine
 import re
 
 stopwords = {"the", "is", "in", "and", "to", "of", "a", "that", "it", "with", "as", "for", "was", "on", "are", "by", "this", "be", "or"}
@@ -99,11 +99,11 @@ class ConfidenceScorer:
         
         # Base score
         base = (
-            0.35 * semantic +
-            0.25 * agreement +
+            0.40 * semantic +
+            0.15 * agreement +
             0.15 * keyword +
-            0.15 * concentration +
-            0.10 * evidence
+            0.10 * concentration +
+            0.20 * evidence
         )
 
         # Evidence penalty
@@ -131,15 +131,20 @@ class ConfidenceScorer:
     # Evidence score
 
     def extract_facts(self, query):
-        words = query.lower().split()
+        query_lower = query.lower()
+        words = query_lower.split()
+        
+        # Use our CONCEPT_GROUPS to expand the facts
+        expanded = self.expand_keywords(words)
+        
         numbers = re.findall(r'\d+', query)
-        dates = re.findall(r'\b\d{4}-\d{2}-\d{2}\b', query)
-        keywords = [
-            w
-            for w in words
-            if len(w) > 2 and w not in stopwords
-        ]
-        return set(keywords + numbers + dates)
+        # Currency is a HARD fact. If query has € and doc has €, evidence should spike.
+        currency = re.findall(r'€|euro|eur|\$|dollar', query_lower)
+        
+        # Filter out stopwords but keep expanded concepts
+        significant_words = {w for w in words if w not in stopwords and len(w) > 2}
+        
+        return significant_words.union(expanded).union(set(numbers)).union(set(currency))
     
     def evidence_coverage(self, facts:dict, candidates):
         
@@ -150,5 +155,26 @@ class ConfidenceScorer:
                 hits += 1
         
         return hits / max(len(facts), 1)
+    
+    def expand_keywords(self, words):
+        # Concept Buckets: Group everything that means the same thing
+        CONCEPT_GROUPS = {
+            "shipping": ["shipping", "delivery", "postage", "freight", "transport", "shipment"],
+            "costs": ["price", "cost", "fee", "charge", "amount", "euro", "€", "handling"],
+            "returns": ["return", "refund", "exchange", "cancel", "restitution"],
+            "condition": ["opened", "package", "original", "used", "new", "seal"]
+        }
+
+        expanded = set()
+        for w in words:
+            w_lower = w.lower()
+            expanded.add(w_lower)
+            
+            # If the word belongs to a concept, add the whole bucket
+            for concept, bucket in CONCEPT_GROUPS.items():
+                if w_lower in bucket or w_lower == concept:
+                    expanded.update(bucket)
+        
+        return expanded
 
         

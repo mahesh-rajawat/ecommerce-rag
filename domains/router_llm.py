@@ -1,6 +1,6 @@
-from llm.factory import get_llm_client
-from domains.router import DomainDetecter
-from logger.logger import get_logger
+from app.llm.factory import get_llm_client
+from app.domains.router import DomainDetecter
+from app.logger.logger import get_logger
 
 class DomainDetectorLLM(DomainDetecter):
     def __init__(self):
@@ -12,7 +12,7 @@ class DomainDetectorLLM(DomainDetecter):
     def detect(self, query):
         prompt = self.get_prompt(query)
         self.logger.debug("Calling llm from domain detector")
-        self.llm.generate(prompt)
+        self.llm.detect_domain(prompt)
         self.domain = self.llm.get_answer()
         self.logger.debug(f"Detected domain from llm {self.domain}")
         return self.domain

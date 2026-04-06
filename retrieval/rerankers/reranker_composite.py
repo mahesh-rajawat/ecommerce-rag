@@ -2,9 +2,9 @@
 
 from email.mime import text
 
-from retrieval.rerank import Reranker
-from retrieval.rerankers.mmr_reranker import MMRReranker
-from config.settings import TOP_K
+from app.retrieval.rerank import Reranker
+from app.retrieval.rerankers.mmr_reranker import MMRReranker
+from app.config.settings import TOP_K
 
 stopwords = {"the", "is", "in", "and", "to", "of", "a", "that", "it", "with", "as", "for", "was", "on", "are", "by", "this", "be", "or"}
 
@@ -30,7 +30,7 @@ class RerankerComposite:
         re_indexes = [c['idx'] for c in reranked_candidates]
         print(f"Reranked candidate indexes: {re_indexes}")
 
-        return reranked_candidates
+        return candidates
     
     def extract_keywords(self):
         words = self.query.lower().split()
